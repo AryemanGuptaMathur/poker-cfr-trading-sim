@@ -270,9 +270,7 @@ This was the sharpest ablation in the project. Even one extra decision step make
 
 ![Trading horizon ablation](results/ablation_trading_horizon.png)
 
-## Main Takeaways
-
-If I had to summarize the current state of the project in a few lines, I would say:
+## Main Takeaways From the Project
 
 - exact poker evaluation materially improved the credibility of the results,
 - MCCFR was worth adding because it gives me a proper sampled literature baseline,
@@ -311,10 +309,10 @@ The main generated files are:
 
 ## Limitations
 
-I think the project is strongest when I am explicit about what it does not do:
+For the future I would like to expand the project to:
 
-- I use Kuhn-style poker, not full Hold'em or a large Leduc implementation.
-- I use a stylized synthetic trading game, not real market data or a calibrated order-book simulator.
+- Use Kuhn-style poker, not full Hold'em or a large Leduc implementation.
+- Use a stylized synthetic trading game, not real market data or a calibrated order-book simulator.
 - My Deep CFR implementation is educational and lightweight; it does not include every component used in larger published systems.
 - The baseline comparisons are internal comparisons in one codebase, not claims of reproducing the exact numbers from the literature.
 - The trading evaluation is sample-based and therefore noisier than the poker evaluation.
