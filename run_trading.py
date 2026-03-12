@@ -7,6 +7,7 @@ import numpy as np
 
 from deep_cfr import DeepCFRTrainer
 from evaluate import exploitability, policy_value, plot_curves, plot_strategy, run_benchmark, save_summary
+from mccfr import ExternalSamplingMCCFRTrainer
 from trading_sim import MarketMakingGame
 
 
@@ -38,6 +39,10 @@ def main() -> None:
     builders = {
         "Vanilla CFR": lambda seed: MarketMakingGame(seed=seed, variant="vanilla", horizon=HORIZON, num_scenarios=NUM_SCENARIOS),
         "CFR+": lambda seed: MarketMakingGame(seed=seed, variant="cfr+", horizon=HORIZON, num_scenarios=NUM_SCENARIOS),
+        "MCCFR": lambda seed: ExternalSamplingMCCFRTrainer(
+            MarketMakingGame(seed=seed, variant="vanilla", horizon=HORIZON, num_scenarios=NUM_SCENARIOS),
+            seed=seed,
+        ),
         "Deep CFR": lambda seed: DeepCFRTrainer(
             MarketMakingGame(seed=seed, variant="vanilla", horizon=HORIZON, num_scenarios=NUM_SCENARIOS),
             seed=seed,
@@ -57,7 +62,7 @@ def main() -> None:
         print(f"{label}: final exploitability {aggregate['final_mean']:.4f} +/- {aggregate['final_std']:.4f}")
         policy_values = []
         for solver in solvers:
-            game = solver.game if isinstance(solver, DeepCFRTrainer) else solver
+            game = solver.game if hasattr(solver, "game") else solver
             profile = solver.average_strategy_profile()
             policy_values.append(policy_value(game, profile, player=0, num_episodes=400, seed=game.seed + 99))
         summary["trainers"][label] = {

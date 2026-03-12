@@ -185,3 +185,21 @@ def plot_strategy(
     plt.tight_layout()
     plt.savefig(output_path, dpi=180)
     plt.close()
+
+
+def plot_bars(
+    values: dict[str, float],
+    title: str,
+    ylabel: str,
+    output_path: str | Path,
+) -> None:
+    plt.figure(figsize=(8, 4.5))
+    labels = list(values.keys())
+    heights = np.asarray(list(values.values()), dtype=float)
+    plt.bar(labels, heights)
+    plt.title(title)
+    plt.ylabel(ylabel)
+    plt.xticks(rotation=15, ha="right")
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=180)
+    plt.close()

@@ -7,6 +7,7 @@ import numpy as np
 
 from deep_cfr import DeepCFRTrainer
 from evaluate import exact_exploitability, exact_policy_value, plot_curves, plot_strategy, run_benchmark, save_summary
+from mccfr import ExternalSamplingMCCFRTrainer
 from poker_cfr import PokerGame
 
 
@@ -34,6 +35,7 @@ def main() -> None:
     builders = {
         "Vanilla CFR": lambda seed: PokerGame(seed=seed, variant="vanilla"),
         "CFR+": lambda seed: PokerGame(seed=seed, variant="cfr+"),
+        "MCCFR": lambda seed: ExternalSamplingMCCFRTrainer(PokerGame(seed=seed, variant="vanilla"), seed=seed),
         "Deep CFR": lambda seed: DeepCFRTrainer(PokerGame(seed=seed, variant="vanilla"), seed=seed),
     }
 
@@ -50,7 +52,7 @@ def main() -> None:
         print(f"{label}: final exploitability {aggregate['final_mean']:.4f} +/- {aggregate['final_std']:.4f}")
         exact_values = []
         for solver in solvers:
-            game = solver.game if isinstance(solver, DeepCFRTrainer) else solver
+            game = solver.game if hasattr(solver, "game") else solver
             profile = solver.average_strategy_profile()
             exact_values.append(exact_policy_value(game, profile, player=0))
         summary["trainers"][label] = {

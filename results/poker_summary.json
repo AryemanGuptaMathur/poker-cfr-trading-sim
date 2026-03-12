@@ -3,7 +3,7 @@
   "evaluation": "Exact root enumeration over all 6 private-card deals",
   "iterations": 200,
   "eval_every": 50,
-  "eval_episodes": 400,
+  "eval_episodes": 300,
   "seeds": [
     0,
     1,
@@ -71,6 +71,37 @@
       "final_exploitability_std": 0.017524825942845632,
       "self_play_value_mean": -0.05996109956331372,
       "self_play_value_std": 0.0063181693775493895
+    },
+    "MCCFR": {
+      "curve": {
+        "iteration": [
+          1.0,
+          50.0,
+          100.0,
+          150.0,
+          200.0
+        ],
+        "mean": [
+          0.4861111111111111,
+          0.26733516396495643,
+          0.2655339298401822,
+          0.2779695859026175,
+          0.278419103124457
+        ],
+        "std": [
+          0.03540985773328321,
+          0.0715405838736797,
+          0.041228380836686306,
+          0.026559751132396007,
+          0.01710350146621969
+        ],
+        "final_mean": 0.278419103124457,
+        "final_std": 0.01710350146621969
+      },
+      "final_exploitability_mean": 0.278419103124457,
+      "final_exploitability_std": 0.01710350146621969,
+      "self_play_value_mean": -0.05481875691762134,
+      "self_play_value_std": 0.0071387203696764755
     },
     "Deep CFR": {
       "curve": {
