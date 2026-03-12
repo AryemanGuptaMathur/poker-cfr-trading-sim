@@ -319,14 +319,6 @@ I think the project is strongest when I am explicit about what it does not do:
 - The baseline comparisons are internal comparisons in one codebase, not claims of reproducing the exact numbers from the literature.
 - The trading evaluation is sample-based and therefore noisier than the poker evaluation.
 
-I do not see those as disqualifying limitations. I see them as the reason the project stays inspectable and explainable.
-
-## Resume Framing
-
-If I were summarizing this project in one line on a resume, I would write something close to:
-
-> Implemented CFR, CFR+, MCCFR, and Deep CFR for toy poker and market-making simulations in Python; added exact exploitability evaluation, multi-seed benchmarking, ablation studies, and reproducible experiment reporting.
-
 ## References
 
 [1] Zinkevich, M., Johanson, M., Bowling, M., & Piccione, C. (2008). *Regret minimization in games with incomplete information*. Advances in Neural Information Processing Systems.
